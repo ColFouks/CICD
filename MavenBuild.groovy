@@ -25,17 +25,11 @@ class MavenBuild {
                     
                     
                 systemGroovyCommand("""
-                def env = System.getenv()
-                def buildNum = env['BUILD_NUMBER']                
-                def gitSha = \$${jobConfig.'maven.shaParamName'}.substring(0, 7)
-                def dateNow = new Date().format('yyyyMMdd.HHmmss')
-
-                def data = new groovy.util.XmlSlurper().parseText(\$${jobConfig.'maven.pomFile'})
-                def v = data.version.toString() - ".0.0-SNAPSHOT"
-                if (v != data.version.toString()) {
-                    v += ".\${buildNum}.\${gitSha}-SNAPSHOT"
-                }
-                env["\${${jobConfig.'maven.versionParamName'}}"] = v
+                def build = this.getProperty('binding').getVariable('build')
+                def listener = this.getProperty('binding').getVariable('listener')
+                def env = build.getEnvironment(listener)
+                def v = new groovy.util.XmlSlurper().parseText(readFileFromWorkspace(${jobConfig.'maven.pomFile'}).version.toString()
+                env["${jobConfig.'maven.versionParamName'}"] = v
                 """)
                 maven {
                     goals("""
