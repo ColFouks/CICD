@@ -12,6 +12,7 @@ class SeedExecutor {
         def configProcessor = new ConfigProcessor(dslFactory)
         def allJCs = configProcessor.processConfig(jcFile)
         def allJobsMap = [:]
+        def jobClass = SeedFunctions.loadJobClass(jc)
 
         allJCs.each { jc ->
             def fullJobName = SeedFunctions.generateJobName(ConfigProcessor.clone(jc))
