@@ -38,7 +38,7 @@ class MavenBuild {
                     v += ".$buildNum.$gitSha-$dateNow-$buildNum"
                     }
                 }
-                env['\${${jobConfig.'maven.versionParamName'}}'] = v
+                env["\${${jobConfig.'maven.versionParamName'}}"] = v
                 """)
                 }
                 maven {
