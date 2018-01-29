@@ -33,7 +33,7 @@ class MavenBuild {
                 def data = new groovy.util.XmlSlurper().parseText(\$${jobConfig.'maven.pomFile'})
                 def v = data.version.toString() - ".0.0-SNAPSHOT"
                 if (v != data.version.toString()) {
-                    v += ".$buildNum.$gitSha-SNAPSHOT"
+                    v += ".20.$gitSha-SNAPSHOT"
                 }
                 env["\${${jobConfig.'maven.versionParamName'}}"] = v
                 """)
