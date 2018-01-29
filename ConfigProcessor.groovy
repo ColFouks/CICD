@@ -106,5 +106,15 @@ class ConfigProcessor implements Serializable {
         }
         return aCopy
     }    
+    private def validate(def config) {
+        config.strictFields?.fields?.each { field ->
+            def fieldParent = field.tokenize('.')[0]
+            def fieldKey = field.tokenize('.')[1]
+            if (!config."${fieldParent}"."${fieldKey}") {
+                throw new IllegalStateException("Null strict field: ${field}")
+            }
+        }
+        return config
+    }    
 }
     
