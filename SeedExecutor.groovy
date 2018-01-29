@@ -20,7 +20,7 @@ class SeedExecutor {
             allJobsMap.each { k,v -> jc."allJobs.${k}" = v }
             configProcessor.prettyPrint(jc)        
             dslFactory.out.println("${(jc.'jobClass.classPath').replaceAll("/", ".")}.${jc.'jobClass.baseClassName'}")
-            jobClass.job(dslFactory, jc)
+            //jobClass.job(dslFactory, jc)
         }
         return allJCs
     }
