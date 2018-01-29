@@ -9,7 +9,7 @@ class SeedExecutor {
     }
 
     def processJCFile(jcFile) {
-        def configProcessor = new ConfigProcessor(dslFactory, isProductionSeed, moduleName, moduleVersion)
+        def configProcessor = new ConfigProcessor(dslFactory)
         def allJCs = configProcessor.processConfig(jcFile)
         def allJobsMap = [:]
 
