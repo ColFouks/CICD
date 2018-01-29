@@ -5,7 +5,7 @@ class SeedFunctions {
         folderedBaseName = [
                 (jc.'job.isProductionSeed')
                         ? jc.'folder.rootDirectory'
-                        : "${jc.'folder.rootDirectory'}/${jc.'folder.program'}/X_CICD_Development/${jc.'job.dslSha'}",
+                        : "${jc.'folder.rootDirectory'}/${jc.'folder.program'}/X_CICD_Development/",
                 jc.'folder.program' ?: "",
                 jc.'folder.projectGroup'?: "",
                 jc.'folder.project'?: "",
