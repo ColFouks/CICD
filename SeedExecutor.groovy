@@ -15,15 +15,13 @@ class SeedExecutor {
 
         allJCs.each { jc ->
             def fullJobName = SeedFunctions.generateJobName(ConfigProcessor.clone(jc))
-            dslFactory.out.println(fullJobName)
             allJobsMap[jc.'job.baseName'] = fullJobName
-            configProcessor.prettyPrint(jc)
+            allJCs.each { jc ->
+                allJobsMap.each { k,v -> jc."allJobs.${k}" = v }
+            }            
+            configProcessor.prettyPrint(jc)            
+            jobClass.job(dslFactory, jc)
         }
-
-        allJCs.each { jc ->
-            allJobsMap.each { k,v -> jc."allJobs.${k}" = v }
-        }
-
         return allJCs
     }
 
