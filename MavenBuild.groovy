@@ -22,6 +22,8 @@ class MavenBuild {
                     jobConfig.'maven.steps' = "versions:set"
                     jobConfig.'maven.nonCodeBuild' = true
                     jobConfig.'maven.extraParams' = "-DnewVersion=\${${jobConfig.'maven.versionParamName'}}"
+                    
+                    
                 systemGroovyCommand("""
                 def env = System.getenv()
                 
