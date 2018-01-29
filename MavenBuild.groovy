@@ -7,7 +7,7 @@ class MavenBuild {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
             scm {
                 git {
-                    remote { url(Functions.generateScmPath(jobConfig)) }
+                    remote { url("${jobConfig.'github.user'}@${jobConfig.'github.host'}:${jobConfig.'github.org'}/${jobConfig.'github.repo'}") }
                     branch("\$${jobConfig.'maven.shaParamName'}")
                 }
             }            
