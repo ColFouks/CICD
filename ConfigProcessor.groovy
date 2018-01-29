@@ -98,4 +98,5 @@ class ConfigProcessor implements Serializable {
         }
         return baseConfig
     }
+}
     
