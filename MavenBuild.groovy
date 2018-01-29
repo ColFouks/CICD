@@ -1,5 +1,3 @@
-package jobdsl.build.job
-
 import SeedFunctions
 
 
