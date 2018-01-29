@@ -5,6 +5,12 @@ class MavenBuild {
     static job (dslFactory, jobConfig) {
         dslFactory.job(SeedFunctions.generateJobNameAndFolder(dslFactory, jobConfig)) {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
+            scm {
+                git {
+                    remote { url(Functions.generateScmPath(jobConfig)) }
+                    branch("\$${jobConfig.'maven.shaParamName'}")
+                }
+            }            
             steps {
                     jobConfig.'maven.steps' = "versions:set"
                     jobConfig.'maven.nonCodeBuild' = true
