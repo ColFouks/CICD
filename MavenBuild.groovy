@@ -8,7 +8,6 @@ class MavenBuild {
             parameters {
                         stringParam(jobConfig.'maven.versionParamName', "", "Artifact version to set")
                         stringParam(jobConfig.'maven.shaParamName', "", "SHA to checkout from")
-                        // This is temporary workaround to make OCR build work with different maven profiles
                         if (jobConfig.'maven.availableProfiles' && jobConfig.'job.profileParamName') {
                             choiceParam(jobConfig.'job.profileParamName', jobConfig.'maven.availableProfiles', 'Please Select PROFILE')
                         }
