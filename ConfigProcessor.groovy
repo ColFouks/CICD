@@ -10,9 +10,6 @@ class ConfigProcessor implements Serializable {
 
     public ConfigProcessor(aFactory) {
         this.dslFactory = aFactory
-        this.isProductionSeed = isProductionSeed
-        this.moduleName = aModuleName
-        this.projectVersion = aProjectVersion
     }    
     public def processConfig(path) {
         def cfText = this.dslFactory.readFileFromWorkspace(path.toString())
@@ -36,7 +33,6 @@ class ConfigProcessor implements Serializable {
             def jc_path = path.toString()
             jc.github.url = "https://${jc.github.host}"
             jc.job.baseName = k
-            jc.job.isProductionSeed = isProductionSeed
             jc.job.dslSha = projectVersion.tokenize('.')[3].split("-SNAPSHOT").first()
             jc.devops.projectVersion = projectVersion
             jc.devops.artifactId = moduleName
