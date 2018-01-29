@@ -5,6 +5,14 @@ class MavenBuild {
     static job (dslFactory, jobConfig) {
         dslFactory.job(SeedFunctions.generateJobNameAndFolder(dslFactory, jobConfig)) {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
+            parameters {
+                        stringParam(jobConfig.'maven.versionParamName', "", "Artifact version to set")
+                        stringParam(jobConfig.'maven.shaParamName', "", "SHA to checkout from")
+                        // This is temporary workaround to make OCR build work with different maven profiles
+                        if (jobConfig.'maven.availableProfiles' && jobConfig.'job.profileParamName') {
+                            choiceParam(jobConfig.'job.profileParamName', jobConfig.'maven.availableProfiles', 'Please Select PROFILE')
+                        }
+                    }            
             scm {
                 git {
                     remote { url("${jobConfig.'github.user'}@${jobConfig.'github.host'}:${jobConfig.'github.org'}/${jobConfig.'github.repo'}") }
