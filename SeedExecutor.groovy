@@ -16,9 +16,7 @@ class SeedExecutor {
         allJCs.each { jc ->
             def fullJobName = SeedFunctions.generateJobName(ConfigProcessor.clone(jc))
             allJobsMap[jc.'job.baseName'] = fullJobName
-            allJCs.each { jc ->
-                allJobsMap.each { k,v -> jc."allJobs.${k}" = v }
-            }            
+            allJobsMap.each { k,v -> jc."allJobs.${k}" = v }
             configProcessor.prettyPrint(jc)            
             jobClass.job(dslFactory, jc)
         }
