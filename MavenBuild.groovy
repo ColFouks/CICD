@@ -40,7 +40,6 @@ class MavenBuild {
                 }
                 env["\${${jobConfig.'maven.versionParamName'}}"] = v
                 """)
-                }
                 maven {
                     goals("""
                         -e
