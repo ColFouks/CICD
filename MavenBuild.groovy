@@ -23,11 +23,10 @@ class MavenBuild {
                     jobConfig.'maven.nonCodeBuild' = true
                     jobConfig.'maven.extraParams' = "-DnewVersion=\${${jobConfig.'maven.versionParamName'}}"
                     
-                    
+                buildNum = env['BUILD_NUMBER']                
+                gitSha = jobConfig.'maven.shaParamName'.substring(0, 7)
                 systemGroovyCommand("""
                 def env = System.getenv()
-                def buildNum = env['BUILD_NUMBER']                
-                def gitSha = \$${jobConfig.'maven.shaParamName'}.substring(0, 7)
                 def dateNow = new Date().format('yyyyMMdd.HHmmss')
 
                 def data = new groovy.util.XmlSlurper().parseText(\$${jobConfig.'maven.pomFile'})
