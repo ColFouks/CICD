@@ -22,17 +22,15 @@ class MavenBuild {
                     jobConfig.'maven.steps' = "versions:set"
                     jobConfig.'maven.nonCodeBuild' = true
                     jobConfig.'maven.extraParams' = "-DnewVersion=\${${jobConfig.'maven.versionParamName'}}"
-                    
-                buildNum = env['BUILD_NUMBER']                
+                            
                 gitSha = jobConfig.'maven.shaParamName'.substring(0, 7)
                 systemGroovyCommand("""
-                def env = System.getenv()
                 def dateNow = new Date().format('yyyyMMdd.HHmmss')
 
                 def data = new groovy.util.XmlSlurper().parseText(\$${jobConfig.'maven.pomFile'})
                 def v = data.version.toString() - ".0.0-SNAPSHOT"
                 if (v != data.version.toString()) {
-                    v += ".${buildNum}.${gitSha}-SNAPSHOT"
+                    v += ".20.${gitSha}-SNAPSHOT"
                 }
                 env["\${${jobConfig.'maven.versionParamName'}}"] = v
                 """)
