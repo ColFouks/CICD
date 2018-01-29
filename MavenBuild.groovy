@@ -25,9 +25,11 @@ class MavenBuild {
                         """.stripIndent())
                     mavenInstallation(jobConfig.'jenkins.mvnLabel')
                     rootPOM(jobConfig.'maven.pomFile')
-                    configure { maven ->
-                        maven / 'settings'(class: "jenkins.mvn.FilePathSettingsProvider") {
-                            path(jobConfig.'maven.mvnConfigFilePath')
+                    if (jenkins.mvn.FilePathSettingsProvider){
+                        configure { maven ->
+                            maven / 'settings'(class: "jenkins.mvn.FilePathSettingsProvider") {
+                                path(jobConfig.'maven.mvnConfigFilePath')
+                            }
                         }
                     }
                 }
