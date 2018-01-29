@@ -32,11 +32,7 @@ class MavenBuild {
                 def v = data.version.toString() - ".0.0-SNAPSHOT"
                 def buildNum = env['BUILD_NUMBER']
                 if (v != data.version.toString()) {
-                    if (setToSnapshot) {
                     v += ".$buildNum.$gitSha-SNAPSHOT"
-                    } else {
-                    v += ".$buildNum.$gitSha-$dateNow-$buildNum"
-                    }
                 }
                 env["\${${jobConfig.'maven.versionParamName'}}"] = v
                 """)
