@@ -26,13 +26,12 @@ class MavenBuild {
                     
                 systemGroovyCommand("""
                 def env = System.getenv()
-                
+                def buildNum = env['BUILD_NUMBER']                
                 def gitSha = \$${jobConfig.'maven.shaParamName'}.substring(0, 7)
                 def dateNow = new Date().format('yyyyMMdd.HHmmss')
 
                 def data = new groovy.util.XmlSlurper().parseText(\$${jobConfig.'maven.pomFile'})
                 def v = data.version.toString() - ".0.0-SNAPSHOT"
-                def buildNum = env['BUILD_NUMBER']
                 if (v != data.version.toString()) {
                     v += ".$buildNum.$gitSha-SNAPSHOT"
                 }
