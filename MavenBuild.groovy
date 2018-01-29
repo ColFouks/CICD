@@ -14,6 +14,7 @@ class MavenBuild {
             steps {
                     jobConfig.'maven.steps' = "versions:set"
                     jobConfig.'maven.nonCodeBuild' = true
+                    jobConfig.'maven.extraParams' = "-DnewVersion=\${${jobConfig.'maven.versionParamName'}}"
                 maven {
                     goals("""
                         -e
