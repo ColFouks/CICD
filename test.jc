@@ -1,0 +1,20 @@
+imports = ["globalConfig.cfg", "buildConfig.cfg"]
+common {
+    folder {
+        projectGroup = "Test"
+        project = "First"
+    }
+    maven {
+        setToSnapshot = true
+    }
+}
+
+__build {
+    imports = ["mavenBuild.cfg"]
+    maven {
+        steps = "deploy"
+    }
+}
+ORE_Build {
+    imports = ["__build"]
+}
