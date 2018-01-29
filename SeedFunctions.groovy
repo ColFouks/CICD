@@ -34,7 +34,7 @@ class SeedFunctions {
     }
 
     static loadJobClass(jc) {
-        return Class.forName("${(jc.'jobClass.classPath')}.${jc.'jobClass.baseClassName'}")?.newInstance()
+        return Class.forName("${(jc.'jobClass.classPath').replaceAll("/", ".")}.${jc.'jobClass.baseClassName'}")?.newInstance()
     }
 
     static parseProjectMapClosure() {
