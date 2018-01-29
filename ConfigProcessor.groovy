@@ -94,5 +94,17 @@ class ConfigProcessor implements Serializable {
         }
         return baseConfig
     }
+    static def clone(def thisConfig) {
+        def aCopy = [:]
+        thisConfig.each { ck, cv ->
+            if (cv instanceof Map) {
+                aCopy."${ck}" = [:]
+                aCopy."${ck}" << cv
+            } else {
+                aCopy."${ck}" = cv
+            }
+        }
+        return aCopy
+    }    
 }
     
