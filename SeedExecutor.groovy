@@ -15,6 +15,7 @@ class SeedExecutor {
         allJCs.each { jc ->
             configProcessor.prettyPrint(jc)        
             def jobClass = Class.forName("${jc.'jobClass.baseClassName'}")?.newInstance()
+            dslFactory.out.println("we are here")
             jobClass.job(dslFactory, jc)
         }
         return allJCs
