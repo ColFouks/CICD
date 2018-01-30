@@ -109,14 +109,15 @@ class ConfigProcessor implements Serializable {
         }
         return config
     }
-    static generateJobName(def jc){
+    static generateJobName(def jc, ){
         def folderedBaseName
         folderedBaseName = [
                 jc.'folder.project'?: "",
                 jc.'folder.jobType'?: "",
                 jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
                 
-        def folderPath = folderedBaseName.tokenize('/')
+        def folderPath = folderedBaseName.tokenize('/').dropRight(1).join('/')
+        dslFactory.out.println(folderPath)
         return folderPath
     }
     void prettyPrint(def jc) {
