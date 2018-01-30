@@ -30,7 +30,7 @@ class MavenBuild {
             scm {
                 git {
                     remote { 
-                        url("https://${jobConfig.'github.org'}/${jobConfig.'github.repo'}") 
+                        url("https://github.com/${jobConfig.'github.org'}/${jobConfig.'github.repo'}") 
                         credentials('GitHub')
                     }
                     branch("\$${jobConfig.'maven.shaParamName'}")
