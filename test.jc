@@ -4,6 +4,9 @@ common {
         org = "SomeOrg"
         repo = "JavaTest"
     }
+    folder  {
+        project = "Java"
+    }
 }
 
 __build {
