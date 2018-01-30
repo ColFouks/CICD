@@ -1,5 +1,4 @@
-import SeedFunctions
-
+import ConfigProcessor
 
 class MavenBuild {
     static job (dslFactory, jobConfig) {
