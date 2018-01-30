@@ -1,15 +1,8 @@
 imports = ["globalConfig.cfg", "buildConfig.cfg"]
 common {
-    folder {
-        projectGroup = "Test"
-        project = "First"
-    }
-    maven {
-        setToSnapshot = true
-    }
     github {
-        org = "ColFouks"
-        repo = "Java_test"
+        org = "SomeOrg"
+        repo = "JavaTest"
     }
 }
 
@@ -19,6 +12,6 @@ __build {
         steps = "deploy"
     }
 }
-ORE_Build {
+Build {
     imports = ["__build"]
 }

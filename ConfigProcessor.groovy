@@ -33,18 +33,11 @@ class ConfigProcessor implements Serializable {
             def jc_path = path.toString()
             jc.github.url = "https://${jc.github.host}"
             jc.job.baseName = k
-            //jc.job.dslSha = projectVersion.tokenize('.')[3].split("-SNAPSHOT").first()
-            //jc.devops.projectVersion = projectVersion
-            //jc.devops.artifactId = moduleName
-            
             jc.remove('commonChildFields')
 
             def flat = (new ConfigObject(validate(jc) as Map).flatten() as Map)
             result << flat
         }
-
-
-
         return result
     }
     private def applyImportList(def baseConfig, def importSourceConfig) {
