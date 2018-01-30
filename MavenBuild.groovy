@@ -13,6 +13,7 @@ class MavenBuild {
             folderName = folderName + "/" + item
             dslFactory.folder(folderName)
         }             
+        dslFactory.out.println(folderedBaseName)
         dslFactory.job(folderedBaseName) {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
             parameters {
