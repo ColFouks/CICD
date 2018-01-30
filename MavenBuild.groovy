@@ -4,7 +4,7 @@ import ConfigProcessor
 class MavenBuild {
     static job (dslFactory, jobConfig) {
         def folderedBaseName = ConfigProcessor.generateJobName(jobConfig)
-
+        dslFactory.out.println(folderedBaseName)
         def folderPath = folderedBaseName.tokenize('/').dropRight(1).join('/')
         def list = folderPath.split("/").toList()
         def folderName = "${list[0]}"
@@ -13,7 +13,7 @@ class MavenBuild {
             folderName = folderName + "/" + item
             dslFactory.folder(folderName)
         }             
-        dslFactory.out.println(folderedBaseName)
+
         dslFactory.job(folderedBaseName) {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
             parameters {
