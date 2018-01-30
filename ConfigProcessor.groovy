@@ -116,7 +116,7 @@ class ConfigProcessor implements Serializable {
                 jc.'folder.jobType'?: "",
                 jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
                 
-        def folderPath = folderedBaseName.tokenize('/').dropRight(1).join('/')
+        def folderPath = folderedBaseName.tokenize('/')
         return folderPath
     }
     void prettyPrint(def jc) {
