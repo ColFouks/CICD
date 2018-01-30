@@ -50,7 +50,7 @@ class MavenBuild {
                 sha = env.GIT_COMMIT
                 buildNum = env.BUILD_NUMBER
                 hudson.FilePath workspace = hudson.model.Executor.currentExecutor().getCurrentWorkspace()
-                File f = new File("${workspace}/pom.xml")
+                File f = new File("\${workspace}/pom.xml")
                 def inputFileText = f.getText()
                 def gitSha = sha.substring(0, 7)
                 def dateNow = new Date().format('yyyyMMdd.HHmmss')
@@ -59,7 +59,7 @@ class MavenBuild {
                 def v = data.version.toString() - ".0.0-SNAPSHOT"
                 println v 
                 if (v != data.version.toString()) {
-                    v += ".$buildNum.$gitSha-SNAPSHOT"
+                    v += ".\$buildNum.\$gitSha-SNAPSHOT"
                 }
                 def pa = new ParametersAction([new StringParameterValue("${jobConfig.'maven.versionParamName'}", v)], ["${jobConfig.'maven.versionParamName'}"])
                 build.addAction(pa)
