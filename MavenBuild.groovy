@@ -13,7 +13,7 @@ class MavenBuild {
         
         def list = folderPath.split("/").toList()
         def folderName = "${list[0]}"
-        for (String item : list.drop(1)) {
+        for (String item : list) {
             folderName = folderName + "/" + item
             dslFactory.folder(folderName)
         }        
