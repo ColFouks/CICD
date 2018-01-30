@@ -109,7 +109,7 @@ class ConfigProcessor implements Serializable {
         }
         return config
     }
-    static generateJobName(def jc){
+    static generateJobName(def jc, def dslFactory){
         def folderedBaseName
         folderedBaseName = [
                 jc.'folder.project'?: "",

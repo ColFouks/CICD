@@ -3,7 +3,7 @@ import ConfigProcessor
 
 class MavenBuild {
     static job (dslFactory, jobConfig) {
-        def folderedBaseName = ConfigProcessor.generateJobName(jobConfig)
+        def folderedBaseName = ConfigProcessor.generateJobName(jobConfig, dslFactory)
         def folderPath = folderedBaseName.tokenize('/').dropRight(1).join('/')
         def list = folderPath.split("/").toList()
         def folderName = "${list[0]}"
