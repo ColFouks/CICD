@@ -13,11 +13,6 @@ class SeedExecutor {
         def allJCs = configProcessor.processConfig(jcFile)
         
         allJCs.each { jc ->
-            def folderedBaseName
-            folderedBaseName = [
-                jc.'folder.project'?: "",
-                jc.'folder.jobType'?: "",
-                jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")           
             configProcessor.prettyPrint(jc)        
             def jobClass = Class.forName("${jc.'jobClass.baseClassName'}")?.newInstance()
             jobClass.job(dslFactory, jc)

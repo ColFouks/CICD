@@ -3,14 +3,7 @@ import SeedFunctions
 
 class MavenBuild {
     static job (dslFactory, jobConfig) {
-        def folderedBaseName
-        folderedBaseName = [
-                jobConfig.'folder.project'?: "",
-                jobConfig.'folder.jobType'?: "",
-                jobConfig.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
-                
-        def folderPath = folderedBaseName.tokenize('/').dropRight(1).join('/')
-        
+        def folderPath = ConfigProcessor.generateJobName(jobConfig)
         def list = folderPath.split("/").toList()
         def folderName = "${list[0]}"
         dslFactory.folder(folderName)
