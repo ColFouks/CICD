@@ -1,6 +1,3 @@
-import ConfigProcessor
-
-
 class MavenBuild {
     static job (dslFactory, jobConfig) {
         def folderedBaseName

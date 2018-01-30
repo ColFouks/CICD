@@ -110,8 +110,13 @@ class ConfigProcessor implements Serializable {
         return config
     }
     void prettyPrint(def jc) {
-
-        def jobName = generateJobName(jc)
+        def folderedBaseName
+        folderedBaseName = [
+                jc.'folder.project'?: "",
+                jc.'folder.jobType'?: "",
+                jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
+                
+        def jobName = folderedBaseName
 
         def header = "======>"
         def footer = '=' * ((jobName.size() + header.size() + 1))
