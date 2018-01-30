@@ -9,12 +9,11 @@ class MavenBuild {
         def list = folderPath.split("/").toList()
         def folderName = "${list[0]}"
         dslFactory.folder(folderName)
-        dslFactory.out.println('we are here')
         for (String item : list.drop(1)) {
             folderName = folderName + "/" + item
             dslFactory.folder(folderName)
         }        
-        
+        dslFactory.out.println('we are here')        
         dslFactory.job(folderedBaseName) {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
             parameters {
