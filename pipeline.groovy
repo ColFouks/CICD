@@ -4,6 +4,7 @@ node(env.NODE_GROUP) {
         checkout([$class: 'GitSCM', branches: [[name: '*/master']],
             userRemoteConfigs: [[url: 'https://github.com/ColFouks/CICD', credentialsId: "GitHub", branch: "master"]]])
          def rawJC = env.JC.decodeBase64()
+        rawJC = new String(rawJC)
          JC = new ConfigSlurper().parse(rawJC)
     }
     

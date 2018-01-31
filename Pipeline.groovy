@@ -13,7 +13,9 @@ class Pipeline {
             folderName = folderName + "/" + item
             dslFactory.folder(folderName)
         }             
-
+        
+        def jcJson = new JsonOutput().toJson(jobConfig).toString()
+        
         dslFactory.pipelineJob(folderedBaseName) {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
             parameters {
@@ -23,7 +25,7 @@ class Pipeline {
                         }
                     } 
             environmentVariables {
-                env("JC", jobConfig.toString().bytes.encodeBase64().toString())
+                env("JC", jcJson.bytes.encodeBase64().toString())
             }
             scm {
                 git {
