@@ -41,6 +41,7 @@ class ConfigProcessor implements Serializable {
                 jc.'folder.jobType'?: "",
                 jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
             allJobs[k] = folderedBaseName
+            dslFactory.out.println(allJobs)
             jc.remove('commonChildFields')
             
             nonFlatJC = jc
