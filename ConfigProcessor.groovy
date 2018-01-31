@@ -3,6 +3,7 @@ import static groovy.json.JsonOutput.*
 class ConfigProcessor implements Serializable {
 
     protected dslFactory
+    public allJobs
     private final String importDirectory = "./"
     public nonFlatJC
 
