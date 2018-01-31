@@ -1,5 +1,5 @@
-class MavenBuild {
-    static job (dslFactory, jobConfig) {
+class Pipeline {
+    static pipelineJob (dslFactory, jobConfig) {
         def folderedBaseName
         folderedBaseName = [
                 jobConfig.'folder.project'?: "",
