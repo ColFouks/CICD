@@ -122,30 +122,6 @@ class ConfigProcessor implements Serializable {
         def footer = '=' * ((jobName.size() + header.size() + 1))
         def content = ["Job Class": jc.'jobClass.baseClassName']
 
-        switch (jc.'folder.jobType') {
-            case "Build": content.put("Source", "${jc.'github.org'}/${jc.'github.repo'}"); break;
-            case "Deploy":
-            case "Maintenance":
-                content.putAll(["Environments": jc.'environment.regex'])
-                if ("SRADeploy".equals(jc.'jobClass.baseClassName')) {
-                    content.putAll(["Projects": groovy.json.JsonOutput.toJson(jc.'artifacts.items')])
-                } else {
-                    content.putAll(["Application GID": jc.'artifacts.deployGroupId'])
-
-                }
-                content.putAll(["Workflow Script": "${jc.'job.workflowDirectory'}/${jc.'job.workflowFile'}"])
-                break;
-            case "Promotion":
-                if ("ImagePromote".equals(jc.'jobClass.baseClassName')) {
-                    content.put("Image regex", jc.'openshift.imageRegex')
-                } else {
-                    content.put("Artifacts", jc.'artifacts.artifactGroups')
-                }
-                break;
-            case "Pipeline": content.putAll(["Environment": jc.'job.fqaEnv' ?: jc.'job.ciEnv']); break;
-        }
-
-
         def outContent = ""
         content.each { k, v -> outContent += "${k}: ${v}\n" }
 
