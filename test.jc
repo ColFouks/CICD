@@ -1,4 +1,4 @@
-imports = ["globalConfig.cfg", "buildConfig.cfg"]
+imports = ["default.cfg", "build.cfg"]
 common {
     github {
         org = "SomeOrg"
@@ -10,7 +10,7 @@ common {
 }
 
 __build {
-    imports = ["mavenBuild.cfg"]
+    imports = ["maven.cfg"]
     maven {
         steps = "deploy"
     }
