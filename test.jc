@@ -29,7 +29,7 @@ Pipeline {
         baseClassName = "Pipeline"
         classPath = ""
     }    
-    job{ 
+    job { 
         pipeline = [ Build: [
                 BRANCH_NAME:"master"
             ]

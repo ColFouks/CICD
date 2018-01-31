@@ -4,6 +4,7 @@ class ConfigProcessor implements Serializable {
 
     protected dslFactory
     private final String importDirectory = "./"
+    public nonFlatJC
 
     public ConfigProcessor() {
     }
@@ -33,7 +34,8 @@ class ConfigProcessor implements Serializable {
             jc.github.url = "https://${jc.github.host}"
             jc.job.baseName = k
             jc.remove('commonChildFields')
-
+            
+            nonFlatJC = jc
             def flat = (new ConfigObject(validate(jc) as Map).flatten() as Map)
             result << flat
         }

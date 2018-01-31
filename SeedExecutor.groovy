@@ -15,7 +15,8 @@ class SeedExecutor {
         allJCs.each { jc ->
             configProcessor.prettyPrint(jc)        
             def jobClass = Class.forName("${jc.'jobClass.baseClassName'}")?.newInstance()
-            jobClass.job(dslFactory, jc)
+            nonFlatJC = configProcessor.nonFlatJC
+            jobClass.job(dslFactory, jc, nonFlatJC)
         }
         return allJCs
     }

@@ -1,5 +1,5 @@
 class Pipeline {
-    static job (dslFactory, jobConfig) {
+    static job (dslFactory, jobConfig, nonFlatJC) {
         def folderedBaseName
         folderedBaseName = [
                 jobConfig.'folder.project'?: "",
