@@ -11,7 +11,7 @@ class ConfigProcessor implements Serializable {
 
     public ConfigProcessor(aFactory) {
         this.dslFactory = aFactory
-        this.allJobs = [:]
+        def allJobs = [:]
     }    
     public def processConfig(path) {
         def cfText = this.dslFactory.readFileFromWorkspace(path.toString())
