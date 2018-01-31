@@ -11,13 +11,19 @@ class SeedExecutor {
     def processJCFile(jcFile) {
         def configProcessor = new ConfigProcessor(dslFactory)
         def allJCs = configProcessor.processConfig(jcFile)
-        def allJobsMap = configProcessor.allJobs
-        
+        def allJobs = [:]
+        allJCs.each { jc ->
+            def folderedBaseName = [
+                jc.'folder.project'?: "",
+                jc.'folder.jobType'?: "",
+                jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
+            allJobs[jc.job.baseName] = folderedBaseName
+        }
         allJCs.each { jc ->
             configProcessor.prettyPrint(jc)        
             def jobClass = Class.forName("${jc.'jobClass.baseClassName'}")?.newInstance()
-            def nonFlatJC = configProcessor.nonFlatJC
-            allJobsMap.each { k,v -> nonFlatJC."allJobs.${k}" = v }
+            def nonFlatJC = configProcessor.nonFlatJC            
+            allJobs.each { k,v -> nonFlatJC."allJobs.${k}" = v }            
             dslFactory.out.println(nonFlatJC)
             jobClass.job(dslFactory, jc, nonFlatJC)
         }

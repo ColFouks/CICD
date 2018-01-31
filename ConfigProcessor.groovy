@@ -3,7 +3,6 @@ import static groovy.json.JsonOutput.*
 class ConfigProcessor implements Serializable {
 
     protected dslFactory
-    public allJobs
     private final String importDirectory = "./"
     public nonFlatJC
 
@@ -12,7 +11,6 @@ class ConfigProcessor implements Serializable {
 
     public ConfigProcessor(aFactory) {
         this.dslFactory = aFactory
-        this.allJobs = [:]
     }    
     public def processConfig(path) {
         def cfText = this.dslFactory.readFileFromWorkspace(path.toString())
@@ -36,12 +34,6 @@ class ConfigProcessor implements Serializable {
             def jc_path = path.toString()
             jc.github.url = "https://${jc.github.host}"
             jc.job.baseName = k
-            def folderedBaseName = [
-                jc.'folder.project'?: "",
-                jc.'folder.jobType'?: "",
-                jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
-            allJobs[k] = folderedBaseName
-            dslFactory.out.println(allJobs)
             jc.remove('commonChildFields')
             
             nonFlatJC = jc
