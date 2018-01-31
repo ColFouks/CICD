@@ -11,10 +11,12 @@ class ConfigProcessor implements Serializable {
 
     public ConfigProcessor(aFactory) {
         this.dslFactory = aFactory
+        this.allJobs = [:]
     }    
     public def processConfig(path) {
         def cfText = this.dslFactory.readFileFromWorkspace(path.toString())
         def config = new ConfigSlurper().parse(cfText)
+        
 
         def commonChildFields =  config.findAll { it.key.startsWith("__") }
         commonChildFields.each {
@@ -38,7 +40,6 @@ class ConfigProcessor implements Serializable {
                 jc.'folder.jobType'?: "",
                 jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
             allJobs[k] = folderedBaseName
-            jc.allJobs = allJobs
             jc.remove('commonChildFields')
             
             nonFlatJC = jc
