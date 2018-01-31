@@ -7,16 +7,20 @@ node(env.NODE_GROUP) {
         def rawJC = env.JC.decodeBase64()
         rawJC = new String(rawJC)
         JC = new groovy.json.JsonSlurperClassic().parseText(rawJC)
+        echo JC.toString()
     }
-    for (int i = 0; i < JC.pipeline.job.size(); i++) {
-        def pipeJob = JC.job.pipeline[i]
-
+    for (kv in mapToList(JC.job.pipeline)) {
+        def pipeJob = kv[0] 
         def pipelineParameters = []
-        for (int j; j < pipeJob.size(); j++){
-            pipelineParameters.add([$class: 'StringParameterValue', name: j.key, value: j.value])
-        }        
+        for (paramskv in mapToList(kv[1])) {
+            pipelineParameters.add([$class: 'StringParameterValue', name: paramskv[0], value: paramskv[1]])
+        }
         build job: pipeJob, parameters: pipelineParameters
-
     }
-    
+}
+@NonCPS
+List<List<?>> mapToList(Map map) {
+  return map.collect { it ->
+    [it.key, it.value]
+  }
 }
