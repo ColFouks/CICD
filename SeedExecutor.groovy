@@ -17,7 +17,7 @@ class SeedExecutor {
                 jc.'folder.project'?: "",
                 jc.'folder.jobType'?: "",
                 jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
-            dslFactory.out.println(jc.job.baseName)
+            dslFactory.out.println(jc)
             allJobs[jc.job.baseName] = folderedBaseName
         }
         allJCs.each { jc ->
