@@ -17,7 +17,7 @@ class SeedExecutor {
                 jc.'folder.project'?: "",
                 jc.'folder.jobType'?: "",
                 jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
-            allJobs[jc.job.baseName] = folderedBaseName
+            allJobs[jc.baseName] = folderedBaseName
         }
         allJCs.each { jc ->
             configProcessor.prettyPrint(jc)        
