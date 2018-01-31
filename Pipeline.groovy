@@ -21,7 +21,10 @@ class Pipeline {
                         if (jobConfig.'maven.availableProfiles' && jobConfig.'job.profileParamName') {
                             choiceParam(jobConfig.'job.profileParamName', jobConfig.'maven.availableProfiles', 'Please Select PROFILE')
                         }
-                    }            
+                    } 
+            environmentVariables {
+                env("JC", jobConfig.bytes.encodeBase64().toString())
+            }
             scm {
                 git {
                     remote { 
