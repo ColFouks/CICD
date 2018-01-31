@@ -1,5 +1,5 @@
 class Pipeline {
-    static pipelineJob (dslFactory, jobConfig) {
+    static job (dslFactory, jobConfig) {
         def folderedBaseName
         folderedBaseName = [
                 jobConfig.'folder.project'?: "",
@@ -14,7 +14,7 @@ class Pipeline {
             dslFactory.folder(folderName)
         }             
 
-        dslFactory.job(folderedBaseName) {
+        dslFactory.pipelineJob(folderedBaseName) {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
             parameters {
                         stringParam(jobConfig.'maven.shaParamName', "", "SHA to checkout from")
