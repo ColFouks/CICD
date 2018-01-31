@@ -32,7 +32,7 @@ class Pipeline {
                 }
                 definition {
                     cps {
-                        script(dslFactory.jobManagement.readFileInWorkspace('pipeline.groovy'))
+                        script(delegate.jobManagement.readFileInWorkspace('pipeline.groovy'))
                     }
                 }
             }            
