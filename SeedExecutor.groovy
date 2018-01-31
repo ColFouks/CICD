@@ -19,6 +19,7 @@ class SeedExecutor {
             allJobsMap.each { k,v -> nonFlatJC."allJobs.${k}" = v }
             allJobsMap.each { k,v -> jc."allJobs.${k}" = v }
             def nonFlatJC = configProcessor.nonFlatJC
+            dslFactory.out.println(nonFlatJC)
             jobClass.job(dslFactory, jc, nonFlatJC)
         }
         return allJCs
