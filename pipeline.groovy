@@ -15,7 +15,7 @@ node(env.NODE_GROUP) {
         for (paramskv in mapToList(kv[1])) {
             pipelineParameters.add([$class: 'StringParameterValue', name: paramskv[0], value: paramskv[1]])
         }
-        build job: pipeJob, parameters: pipelineParameters
+        build job: JC.allJobs.pipeJob, parameters: pipelineParameters
     }
 }
 @NonCPS

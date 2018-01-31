@@ -33,10 +33,15 @@ class ConfigProcessor implements Serializable {
             def jc_path = path.toString()
             jc.github.url = "https://${jc.github.host}"
             jc.job.baseName = k
+            def folderedBaseName = [
+                jc.'folder.project'?: "",
+                jc.'folder.jobType'?: "",
+                jc.'job.baseName'].findAll { it != null && it.toString().length() != 0 }.join("/")
+            allJobs[k] = folderedBaseName
+            jc.allJobs = allJobs
             jc.remove('commonChildFields')
             
             nonFlatJC = jc
-            dslFactory.out.println(jc)
             def flat = (new ConfigObject(validate(jc) as Map).flatten() as Map)
             result << flat
         }
