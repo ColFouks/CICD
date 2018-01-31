@@ -30,9 +30,10 @@ class Pipeline {
                     }
                     branch("\$${jobConfig.'maven.shaParamName'}")
                 }
+                def wfFile = delegate.jobManagement.readFileInWorkspace('pipeline.groovy')
                 definition {
                     cps {
-                        script(delegate.jobManagement.readFileInWorkspace('pipeline.groovy'))
+                        script(wfFile)
                     }
                 }
             }            
