@@ -14,7 +14,7 @@ class Pipeline {
             dslFactory.folder(folderName)
         }             
         
-        def jcJson = new groovy.json.JsonOutput().toJson(jobConfig).toString()
+        def jcJson = new groovy.json.JsonOutput().toJson(nonFlatJC).toString()
         
         dslFactory.pipelineJob(folderedBaseName) {
             jobConfig."maven.profiles" = jobConfig."maven.profiles" + ["\$${jobConfig."job.profileParamName"}"]
