@@ -8,14 +8,14 @@ node(env.NODE_GROUP) {
         rawJC = new String(rawJC)
         JC = new groovy.json.JsonSlurperClassic().parseText(rawJC)
     }
-    for (int i = 0; i < JC.pipeline.steps.size(); i++) {
-        def pipeJob = JC.pipeline.steps[i]
+    for (int i = 0; i < JC.job.pipeline.size(); i++) {
+        def pipeJob = JC.job.pipeline[i]
 
         def pipelineParameters = []
-        for (int j; j < pipeJob.params.size(); j++){
+        for (int j; j < pipeJob.size(); j++){
             pipelineParameters.add([$class: 'StringParameterValue', name: j.key, value: j.value])
         }        
-        build job: pipeJob, parameters: pipelineParameters
+        build job: i, parameters: pipelineParameters
 
     }
     
