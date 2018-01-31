@@ -36,7 +36,7 @@ class ConfigProcessor implements Serializable {
             jc.remove('commonChildFields')
             
             nonFlatJC = jc
-            aFactory.out.println(jc)
+            dslFactory.out.println(jc)
             def flat = (new ConfigObject(validate(jc) as Map).flatten() as Map)
             result << flat
         }
