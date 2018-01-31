@@ -15,6 +15,18 @@ __build {
         steps = "deploy"
     }
 }
+__pipeline {
+    folder {
+        jobType = "Pipeline"
+    }
+}
 Build {
     imports = ["__build"]
+}
+Pipeline {
+    imports = ["__pipeline"]
+    jobClass {
+        baseClassName = "Pipeline"
+        classPath = ""
+    }    
 }
