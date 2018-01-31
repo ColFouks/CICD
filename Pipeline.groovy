@@ -23,7 +23,7 @@ class Pipeline {
                         }
                     } 
             environmentVariables {
-                env("JC", jobConfig.bytes.encodeBase64().toString())
+                env("JC", jobConfig.toString().bytes.encodeBase64().toString())
             }
             scm {
                 git {
