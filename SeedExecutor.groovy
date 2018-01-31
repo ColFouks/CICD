@@ -18,6 +18,7 @@ class SeedExecutor {
             def jobClass = Class.forName("${jc.'jobClass.baseClassName'}")?.newInstance()
             def nonFlatJC = configProcessor.nonFlatJC
             allJobsMap.each { k,v -> nonFlatJC."allJobs.${k}" = v }
+            dslFactory.out.println(nonFlatJC)
             jobClass.job(dslFactory, jc, nonFlatJC)
         }
         return allJCs
