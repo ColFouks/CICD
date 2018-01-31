@@ -11,6 +11,7 @@ class SeedExecutor {
     def processJCFile(jcFile) {
         def configProcessor = new ConfigProcessor(dslFactory)
         def allJCs = configProcessor.processConfig(jcFile)
+        def allJobsMap = [:]
         
         allJCs.each { jc ->
             configProcessor.prettyPrint(jc)        
