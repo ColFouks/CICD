@@ -31,7 +31,7 @@ class ConfigProcessor implements Serializable {
             def jc = applyConfigObject(clone(baseConfig), v)
             def jc_path = path.toString()
             jc.github.url = "https://${jc.github.host}"
-            //jc.job.baseName = k
+            jc.job.baseName = k
             jc.remove('commonChildFields')
 
             def flat = (new ConfigObject(validate(jc) as Map).flatten() as Map)
